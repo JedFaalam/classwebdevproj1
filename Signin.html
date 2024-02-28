@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Shop</title>
+    <!-- Bootstrap -->
+	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+	<link href="css/Navigation.css" rel="stylesheet">
+	
+	  
+	<!-- Validation script for form-->
+	<script>
+		function debug(){
+			console.log(localStorage.getItem("SignedIn"));
+		}
+		
+		window.onload = debug;
+		
+		function ValidEmail(email){
+			// regex for email validation
+			regEmail = /.*(\@).*(\.).*/;
+			
+			em = email.value
+			result = regEmail.test(em)
+			
+			if (result){
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+
+		function ValidName(username){
+			//regex for name
+			regName = /[A-Z][a-z]*?[\ ][A-Z][a-z]*/
+			
+			un = username.value
+			result = regName.test(un)
+			
+			if (result){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		var errfound = false;
+
+		function Validate(){
+			event.preventDefault();
+
+			var username = document.getElementById("username");
+			var email = document.getElementById("email");
+
+			errfound = false;
+
+			if (!ValidEmail(email)){
+				Error(email, "Must be a valid email");
+			}
+
+			if (!ValidName(username)){
+				Error(username, "Must be a valid name");
+			}
+			
+			if(!errfound){ // if there is no error
+				//save data to local session
+				
+				name = document.signin.username.value;
+				email = document.signin.email.value;
+			
+				street = document.signin.street.value;
+				city = document.signin.city.value;
+				state = document.signin.state.value;
+				zip = document.signin.zip.value;
+				
+				
+				localStorage.setItem("username", name)
+				localStorage.setItem("email", email)
+				localStorage.setItem("street", street)
+				localStorage.setItem("city", city)
+				localStorage.setItem("state", state)
+				localStorage.setItem("zip", zip)
+				//set signed in to true
+				localStorage.setItem("SignedIn", true);
+				//load account page
+				
+				console.log(localStorage.getItem("username"))
+				console.log(localStorage.getItem("email"))
+				
+				
+				window.open("Account.html", "_self")
+			}
+
+			return !errfound;
+		}	
+
+		function Error(elem, text){
+			if (errfound) return;
+			window.alert(text);
+			elem.select();
+			elem.focus();
+			errfound = true;
+		}
+
+	</script>  
+  </head>
+  <body>
+  	<!-- body code goes here -->
+	  <ul>
+		  <!-- nav bar-->
+		  <li><a href="Home.html">Home</a></li>
+		  <li><a href="Shop.html">Shop</a></li>
+		  <li><a href="NotFound.html" id="accountButton">Account</a></li>
+	  </ul>
+	
+	  <h1>Sign-in Form</h1>
+	  <form name="signin" onsubmit="return Validate();">
+	  <b>Name:</b> <input type="text" name = "username" id="username" size="30">
+	  
+	  <b>Email:</b> <input type="text" name = "email" id="email" size="40">
+      <br>
+	  <b>Password:</b> <input type="text" name="password" size="20">
+	  <br>
+	  <hr>
+      <b>Optional</b>
+	  
+	  <br>
+	  <b>Address</b> <br>
+      <b>Street:</b> <input type="text" name="street" size="20">
+	  <b>City:</b> <input type="text" name="city" size="20">
+	  <b>State:</b> <input type="text" name="state" size="20">
+	  <b>ZIP:</b> <input type="text" name="zip" size="5">
+	  
+	  <hr>
+	  <input type="submit" name="submit" value="Sign In" >
+	    
+		
+	  </form>
+
+	  
+	<!-- Javascript files I wrote myself for this assignment-->
+	<script src="js/login.js"></script>
+	  
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="js/jquery-3.4.1.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/popper.min.js"></script> 
+	<script src="js/bootstrap-4.4.1.js"></script>
+  </body>
+</html>

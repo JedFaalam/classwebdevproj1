@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Shop</title>
+    <!-- Bootstrap -->
+	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+	<link href="css/Navigation.css" rel="stylesheet">
+	  
+  </head>
+  <body>
+  	<!-- body code goes here -->
+
+	  <h1>The Music Shop</h1>
+
+	  <ul>
+		  <!-- nav bar-->
+		  <li><a href="Home.html">Home</a></li>
+		  <li><a href="Shop.html">Shop</a></li>
+		  <li><a href="NotFound.html" id="accountButton">Account</a></li>
+	  </ul>
+	  
+	  <h3>Name</h3>
+	  <p id = "name"></p>
+	  
+	  <h3>Email</h3>
+	  <p id = "email"></p>
+
+	  <h3>Address</h3>
+	  <p id = "address"></p>
+	  
+
+	  
+	  
+	  
+	 <script>
+	  	function loadAccountData(){
+			console.log(localStorage.getItem("name"))
+			console.log(localStorage.getItem("email"))
+			
+			pageName = document.getElementById("name");
+			pageEmail = document.getElementById("email");
+			pageAddress = document.getElementById("address");
+			
+			
+			pageName.innerHTML = localStorage.getItem("username");
+			pageEmail.innerHTML = localStorage.getItem("email");
+			
+			st = localStorage.getItem("street");
+			ci = localStorage.getItem("city");
+			sa = localStorage.getItem("state");
+			zi = localStorage.getItem("zip");
+			
+			[st, ci, sa, zi].forEach(v => {if(v == null){
+				v == ""
+			}})
+			
+			pageAddress.innerHTML = st + "<br>" + ci + " " + sa + "<br>" + zi;
+		}
+		 
+		loadAccountData();
+	 </script>
+	  
+	<!-- Javascript files I wrote myself for this assignment-->
+	<script src="js/login.js"></script>
+	  
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="js/jquery-3.4.1.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/popper.min.js"></script> 
+	<script src="js/bootstrap-4.4.1.js"></script>
+  </body>
+</html>
